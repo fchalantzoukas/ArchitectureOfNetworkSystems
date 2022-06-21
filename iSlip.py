@@ -14,7 +14,7 @@ def doGrant(r,g,grant):
     print('\nGrant Phase')
     for i in range(4):
         for j in range(4):
-            if r[(g[i]+j)%4][i]!=[]:
+            if r[(g[i]+j)%4][i]!=[]: #Αν βρεθεί αίτημα για την έξοδο i από την είσοδο j ξεκινώντας από την είσοδο g[i]
                 print('Grant from output {} to input {}'.format(i,(g[i]+j)%4))
                 grant[i]=((g[i]+j)%4)
                 break
@@ -26,12 +26,12 @@ def doAccept(acc,g,out,grant,r):
     print('\nAccept Phase')
     for i in range(4):
         for j in range(4):
-            if grant[(acc[i]+j)%4]==i:
+            if grant[(acc[i]+j)%4]==i: #Αν βρεθεί grant για την είσοδο i ξεκινώντας από την έξοδο acc[i]
                 try:
                     r[i][(acc[i]+j)%4].pop(0)
                     print('Input {} accepts the grant from output {}'.format(i,(acc[i]+j)%4))
                     out[(acc[i]+j)%4]=i
-                    g[(acc[i]+j)%4]=i+1
+                    g[(acc[i]+j)%4]=i+1 #Αλλαγή του αντίστοιχου δείκτη g αφού γίνεται δεκτό κάποιο grant
                     acc[i]=(acc[i]+j+1)%4
                     break
                 except: pass
@@ -41,8 +41,8 @@ def doAccept(acc,g,out,grant,r):
 def addReq(r):
     for i in range(4):
         inp=random.randint(0,1)
-        if inp==1:
-            j=random.randint(0,3)
+        if inp==1: #Αν υπάρχει πακέτο εισόδου στην είσοδο i
+            j=random.randint(0,3) #Επιλογή εξόδου
             r[i][j].append(1)
     return r
 
